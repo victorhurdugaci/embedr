@@ -22,7 +22,7 @@ func generateGoCode(opts generateOptions) (string, error) {
 
 	packageName := opts.Package
 	if packageName == "" {
-		packageName = filepath.Dir(opts.WorkingDir)
+		packageName = filepath.Base(opts.WorkingDir)
 	}
 
 	normalizedFilePaths := make([]string, len(opts.FilePaths))
