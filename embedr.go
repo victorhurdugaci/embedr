@@ -40,3 +40,19 @@ func (e *Embedr) Open(path string) (io.Reader, error) {
 
 	return base64.NewDecoder(base64.StdEncoding, bytes.NewReader(content)), nil
 }
+
+// WalkFunc is the argument passed to Walk
+type WalkFunc func(path string) error
+
+// Walk traverses all embeded files.
+// If the argument function returns an error, that error is returned by Walk
+func (e *Embedr) Walk(walkFn WalkFunc) error {
+	for filePath := range e.files {
+		err := walkFn(filePath)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

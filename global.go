@@ -21,3 +21,9 @@ func Add(path string, content string) {
 func Open(path string) (io.Reader, error) {
 	return global.Open(path)
 }
+
+// Walk traverses all embeded files.
+// If the argument function returns an error, that error is returned by Walk
+func Walk(walkFn WalkFunc) error {
+	return global.Walk(walkFn)
+}
